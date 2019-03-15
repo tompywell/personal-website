@@ -29,4 +29,5 @@ firebase.json
 
 build/
 
-/src/images/*
+/src/images/avatar.jpg
+/src/images/background.jpg
