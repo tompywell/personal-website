@@ -29,4 +29,4 @@ firebase.json
 
 build/
 
-/src/images/
+/src/images/*
