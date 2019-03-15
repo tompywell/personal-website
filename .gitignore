@@ -27,7 +27,6 @@ yarn-error.log*
 .firebaserc
 firebase.json
 
-build/
-
+# personal images
 /src/images/avatar.jpg
 /src/images/background.jpg
