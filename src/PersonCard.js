@@ -18,11 +18,10 @@ import green from '@material-ui/core/colors/green'
 
 const styles = theme => ({
   card: {
-    maxWidth: 800,
+    maxWidth: 600,
     margin: theme.spacing.unit
   },
   media: {
-    height: 0,
     paddingTop: '56.25%', // 16:9
   },
   actions: {
@@ -53,11 +52,24 @@ const styles = theme => ({
 });
 
 class PersonCard extends React.Component {
-  state = { expanded: false };
+  state = { expanded: false, age: 0};
+
+  componentDidMount = () => {
+    this.setAge()
+    this.interval = setInterval(() => this.setAge(), 100);
+  }
 
   handleExpandClick = () => {
     this.setState(state => ({expanded: !state.expanded}));
   };
+
+  setAge = () => {
+    let msInYear = 1000 * 60 * 60 * 24 * 365.25
+    let now = new Date();
+    let birthDate = new Date(1996, 2, 31)
+    let age = ((now - birthDate) / msInYear).toFixed(8)
+    this.setState(state => ({age: age}))
+  }
 
   render(){
     const { classes } = this.props;
@@ -76,12 +88,12 @@ class PersonCard extends React.Component {
         title = "Tom Pywell"
       />
       <CardContent>
-        <Typography component="p">
-          I'm a <b>Computer Science Graduate</b> from <b>Trinity College Dublin</b>.
+        <Typography variant="body1">
+          I'm a {this.state.age} year old <b>Computer Science Graduate</b> from <b>Trinity College Dublin</b>.
           Currently I work as a private <b>Math Tutor</b>. I really enjoy teaching and <b>Riding Bikes</b>.
         </Typography>
       </CardContent>
-      <CardActions className={classes.actions} disableActionSpacing>
+      <CardActions className={classes.actions}>
         <Button variant="contained" href="https://www.github.com/tompywell" className={classes.button}>
           GitHub
         </Button>
@@ -102,16 +114,11 @@ class PersonCard extends React.Component {
           <ExpandMoreIcon/>
         </IconButton>
       </CardActions>
-      <Collapse in={this.state.expanded} timeout="3" unmountOnExit>
+      <Collapse in={this.state.expanded} unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-            Hi. Thanks for visiting.
-          </Typography>
-          <Typography paragraph>
-            This site is written in <Link href={"https://reactjs.org"} className={classes.link}>React</Link>, using components from <Link href={"https://material-ui.com"} className={classes.link}>Material-UI</Link>.
-          </Typography>
-          <Typography paragraph>
-            You can probably find the source on my GitHub with the link above.
+          <Typography variant="body1">
+            Hi. Thanks for visiting my website. The site is written in <Link href={"https://reactjs.org"} className={classes.link}>React</Link>, using components from <Link href={"https://material-ui.com"} className={classes.link}>Material-UI</Link>.
+            You can probably find the source on my GitHub with the link above. I'm hosting it for free on <Link href={"https://firebase.google.com/"} className={classes.link}>Firebase</Link>.
           </Typography>
         </CardContent>
       </Collapse>
