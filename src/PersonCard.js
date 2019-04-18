@@ -14,12 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Link from '@material-ui/core/Link'
-import green from '@material-ui/core/colors/green'
 
 const styles = theme => ({
   card: {
     maxWidth: 600,
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    backgroundColor: '#26252c',
+    color: '#666666'
   },
   media: {
     paddingTop: '56.25%', // 16:9
@@ -37,17 +38,46 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  button: {
+  github: {
     margin: theme.spacing.unit,
-    color: 'white',
-    backgroundColor: green[700]
+    color: '#26252c',
+    backgroundColor: '#c9354e'
+  },
+  instagram: {
+    margin: theme.spacing.unit,
+    color: '#26252c',
+    backgroundColor: '#44b5d9'
+  },
+  linkedin: {
+    margin: theme.spacing.unit,
+    color: '#26252c',
+    backgroundColor: '#fec870'
   },
   avatar: {
     width: 80,
     height: 80
   },
   link: {
-    color: green[800]
+    color: '#AAAAAA'
+  },
+  aboutMe: {
+    paddingBottom: 0
+  },
+  aboutMeText: {
+    color: '#666666',
+  },
+  aboutThisSite: {
+    paddingTop: 0,
+    paddingBottom: '16px !important'
+  },
+  aboutThisSiteText: {
+    color: '#666666'
+  },
+  title: {
+    color: '#AAAAAA'
+  },
+  subheader: {
+    color: '#666666'
   }
 });
 
@@ -66,7 +96,7 @@ class PersonCard extends React.Component {
   setAge = () => {
     let msInYear = 1000 * 60 * 60 * 24 * 365.25
     let now = new Date();
-    let birthDate = new Date(1996, 2, 31)
+    let birthDate = new Date(1996, 2, 31, 22, 40, 0, 0)
     let age = ((now - birthDate) / msInYear).toFixed(8)
     this.setState(state => ({age: age}))
   }
@@ -76,6 +106,10 @@ class PersonCard extends React.Component {
     return (
       <Card className={classes.card}>
       <CardHeader
+        classes={{
+          title: classes.title,
+          subheader: classes.subheader
+        }}
         avatar = {
           <Avatar alt="Tom Pywell" src={require("./images/avatar.jpg")} className={classes.avatar}/>
         }
@@ -87,20 +121,20 @@ class PersonCard extends React.Component {
         image = {require("./images/background.jpg")}
         title = "Tom Pywell"
       />
-      <CardContent>
-        <Typography variant="body1">
+      <CardContent className={classes.aboutMe}>
+        <Typography className={classes.aboutMeText} variant="body1">
           I'm a {this.state.age} year old <b>Computer Science Graduate</b> from <b>Trinity College Dublin</b>.
           Currently I work as a private <b>Math Tutor</b>. I really enjoy teaching and <b>Riding Bikes</b>.
         </Typography>
       </CardContent>
       <CardActions className={classes.actions}>
-        <Button variant="contained" href="https://www.github.com/tompywell" className={classes.button}>
+        <Button className={classes.github} variant="contained" href="https://www.github.com/tompywell">
           GitHub
         </Button>
-        <Button variant="contained" href="https://www.linkedin.com/in/tompywell" className={classes.button}>
+        <Button className={classes.instagram} variant="contained" href="https://www.linkedin.com/in/tompywell">
           LinkedIn
         </Button>
-        <Button variant="contained" href="https://www.instagram.com/_to.m" className={classes.button}>
+        <Button className={classes.linkedin} variant="contained" href="https://www.instagram.com/_to.m">
           Instagram
         </Button>
         <IconButton
@@ -115,8 +149,8 @@ class PersonCard extends React.Component {
         </IconButton>
       </CardActions>
       <Collapse in={this.state.expanded} unmountOnExit>
-        <CardContent>
-          <Typography variant="body1">
+        <CardContent className={classes.aboutThisSite}>
+          <Typography className={classes.aboutThisSiteText} variant="body1">
             Hi. Thanks for visiting my website. The site is written in <Link href={"https://reactjs.org"} className={classes.link}>React</Link>, using components from <Link href={"https://material-ui.com"} className={classes.link}>Material-UI</Link>.
             You can probably find the source on my GitHub with the link above. I'm hosting it for free on <Link href={"https://firebase.google.com/"} className={classes.link}>Firebase</Link>.
           </Typography>

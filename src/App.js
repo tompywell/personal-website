@@ -4,12 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import PersonCard from './PersonCard'
 import 'typeface-roboto'
 import Grid from '@material-ui/core/Grid';
-import green from '@material-ui/core/colors/green'
 
 const styles = theme => ({
   grid: {
     minHeight: "100vh",
-    backgroundColor: green[200]
+    backgroundColor: '#1d1c23'
   }
 });
 
